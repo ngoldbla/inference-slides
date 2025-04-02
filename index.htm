@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="viewport-fit=cover, width=device-width, height=device-height, initial-scale=1" />
+<link rel="stylesheet" href="engine/main.css">
+<link rel="stylesheet" href="theme/copenhagen.css">
+<link rel="stylesheet" href="engine/katex/katex.min.css">
+<style>
+:root{
+--logo: /assets/1.png;
+--darkaccent1color: #E1EBE3;
+--lightaccent1color: #6E9075;
+--accent2: #43aa8b;
+--accent3: #f9c74f;
+--accent4: #90be6d;
+--accent5: #f8961e;
+--accent6: #577590;
+--lighttitletextcolor: #ffffffe6;
+--darktitletextcolor: #000000b3;
+--lightbodytextcolor: #ffffffe6;
+--darkbodytextcolor: #000000b3;
+--lightbackgroundcolor: transparent;
+--darkbackgroundcolor: transparent;
+--bodyfont: Albert Sans;
+--titlefont: Albert Sans;
+--lightframecolor: #FFFFFF;
+--darkframecolor: #000000;
+} 
+
+</style>
+</head>
+<body class="responsive">
+<div class="reveal">
+<div class="slides">
+<section class="variable-size-headings dark v-split-container responsive present fit-warning has-light-background fitted" data-background-color="#6e9075" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-v-split media-grid" style="width: 100%; font-size: 0.719rem;">
+        <div style=""><h1 id="inferenceattheedge">Inference at the Edge</h1>
+
+<h3 id="howtoworksecurelyandofflinewithlanguagemodels">How to Work Securely and Offline with Language Models</h3>
+
+<p>Dylan Goldblatt, Ph.D.</p>
+
+<p>Kennesaw State University</p>
+
+<p>Slides: </p>
+
+<p>Extras: </p></div>
+        <figure style=""><img src="images/a-minimalist-pencil-illustration-of-a-sl_Hkhy8WRzQ_m1_aXoRbPOHw_Qryc9qSiSoWOgLHB4eUKCg.png" class=" position-center-center"></figure>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings dark default-container responsive present has-light-background fitted" data-background-color="#6e9178" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.859rem;">
+        <div style=""><h2 id="todaysjourney">Today's Journey</h2>
+
+<ol>
+<li>Why local inference matters</li>
+<li>How to select the right foundation model</li>
+<li>Run local LLMs with RAG functions</li>
+<li>Transcribe audio and video files locally</li>
+<li>Securing remote inference</li>
+</ol></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark cover-container responsive present has-light-background fitted" data-background-color="#6e927c" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-cover" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="1.whylocalinferencematters">1. Why Local Inference Matters</h1></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark default-container responsive present has-light-background fitted" data-background-color="#6e937f" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.953rem;">
+        <div style=""><h2 id="keybenefits">Key Benefits</h2>
+
+<ul>
+<li>Privacy &amp; data security</li>
+<li>Independence from connectivity</li>
+<li>Low latency, high speed</li>
+<li>Control over updates and usage</li>
+<li>Personalization without sharing data</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark default-container responsive present has-light-background fitted" data-background-color="#6e9483" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.906rem;">
+        <div style=""><h2 id="privacysecurity">Privacy &amp; Security</h2>
+
+<ul>
+<li>Your input data never leaves your device</li>
+<li>No one else can access, store, or analyze it</li>
+<li>No server logs of your queries exist</li>
+<li>No training on your proprietary information</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark default-container responsive present has-light-background fitted" data-background-color="#6e9586" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.953rem;">
+        <div style=""><h2 id="availabilitycost">Availability &amp; Cost</h2>
+
+<ul>
+<li>Works without internet access</li>
+<li>Works in secure environments</li>
+<li>Works without downtimes and outages</li>
+<li>Works without a dedicated budget/subscription</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark default-container responsive present has-light-background fitted" data-background-color="#6e968a" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h2 id="speedcontrol">Speed &amp; Control</h2>
+
+<ul>
+<li>Fast responses</li>
+<li>Full control over model versions</li>
+<li>No surprise interface or functionality changes</li>
+<li>You decide when to update—or not</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark cover-container responsive present has-light-background fitted" data-background-color="#6c918a" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-cover" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="2.selectingfoundationmodels">2. Selecting Foundation Models</h1></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark v-split-container responsive present has-light-background fitted" data-background-color="#6b8b8a" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-v-split media-grid" style="width: 100%; font-size: 0.859rem;">
+        <div style=""><h2 id="choosingtherightmodel">Choosing the Right Model</h2>
+
+<ul>
+<li>Find a model that suits your hardware</li>
+<li>Match a model to your needs</li>
+<li>Use quantization to adjust for both</li>
+</ul></div>
+        <figure style=""><img src="images/background_removed_image_-SMstTUTSBmFSd4c11ICgA.png" class=" size-contain position-center-center"></figure>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings dark full-image-container responsive present has-dark-background fitted" data-background-color="#6a858a" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-full-image media-grid" style="width: 100%; font-size: 1rem;">
+        <figure style=""><img src="images/Screenshot%202025-03-31%20at%209.05.48%E2%80%AFPM.png" class=" size-contain position-center-center"></figure>
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings dark grid-container responsive present has-dark-background fitted" data-background-color="#697f89" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-grid grid-items-6 " style="width: 100%; font-size: 0.906rem;">
+        <div style=""><h3 id="llamameta">LLaMA (Meta)</h3>
+
+<ul>
+<li>Generous context windows</li>
+<li>Excellent size-quality balance</li>
+</ul></div><div style=""><h3 id="mistral">Mistral</h3>
+
+<ul>
+<li>Perfect for limited hardware</li>
+<li>Good balance of capabilities</li>
+</ul></div><div style=""><h3 id="gemmagoogle">Gemma (Google)</h3>
+
+<ul>
+<li>Perfect for limited hardware</li>
+<li>Good balance of capabilities</li>
+</ul></div><div style=""><h3 id="phimicrosoft">Phi (Microsoft)</h3>
+
+<ul>
+<li>High speed and small size</li>
+<li>Can run on edge hardware including phones</li>
+</ul></div><div style=""><h3 id="qwenalibaba">Qwen (Alibaba)</h3>
+
+<ul>
+<li>Competes with larger, private models</li>
+<li>Less computationally demanding vs. DeepSeek</li>
+</ul></div><div style=""><h3 id="deepseek">DeepSeek</h3>
+
+<ul>
+<li>Matches private models in quality</li>
+<li>Disallowed for USG work computers</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings dark default-container responsive present fit-warning has-dark-background fitted" data-background-color="#677989" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.485rem;">
+        <div style=""><table>
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+
+<thead>
+<tr>
+	<th><strong>LLM Family</strong></th>
+	<th><strong>Model Sizes</strong></th>
+	<th><strong>Multilingual</strong></th>
+	<th><strong>Coding Strength</strong></th>
+	<th><strong>Context</strong></th>
+	<th><strong>MMLU</strong></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td><strong>Google Gemma</strong> (3)</td>
+	<td>27B (12B, 4B, 1B)</td>
+	<td>Yes (140+ langs)</td>
+	<td>Moderate (basic coding ability)</td>
+	<td>128k tokens</td>
+	<td><strong>~67.5%</strong></td>
+</tr>
+<tr>
+	<td><strong>Microsoft Phi</strong> (Phi-4)</td>
+	<td>5.6B, 3.8B <em>(plus 14B)</em></td>
+	<td>Yes (broadly multilingual)</td>
+	<td><strong>Yes</strong> – excels for its size</td>
+	<td>up to 128k tokens</td>
+	<td><strong>~69–78%</strong></td>
+</tr>
+<tr>
+	<td><strong>Mistral</strong> (Large&nbsp;2)</td>
+	<td>123B (also 24B, 7B)</td>
+	<td>Yes (dozens of langs)</td>
+	<td><strong>Yes</strong> – strong; trained heavily on code</td>
+	<td>128k tokens</td>
+	<td><strong>~84.0%</strong></td>
+</tr>
+<tr>
+	<td><strong>Alibaba Qwen</strong> (2.5)</td>
+	<td>72B (32B, 14B, 7B)</td>
+	<td>Yes (29+ languages)</td>
+	<td><strong>Yes</strong> – esp. 7B <em>Coder</em> variant</td>
+	<td>128k tokens</td>
+	<td><strong>~86%</strong></td>
+</tr>
+<tr>
+	<td><strong>Meta LLaMA</strong> (3.1)</td>
+	<td>405B, 70B, 8B</td>
+	<td>Partial (8 languages)</td>
+	<td><strong>Yes</strong> – state-of-the-art (matches GPT-4-level)</td>
+	<td>128k tokens</td>
+	<td><strong>~87.3%</strong></td>
+</tr>
+<tr>
+	<td><strong>DeepSeek</strong> (R1)</td>
+	<td>671B (MoE)</td>
+	<td>Yes (EN/ZH high proficiency)</td>
+	<td><strong>Yes</strong> – top-tier reasoning &amp; code</td>
+	<td>128k tokens</td>
+	<td><strong>~90.8%</strong></td>
+</tr>
+</tbody>
+</table></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark default-container responsive present fit-warning has-dark-background fitted" data-background-color="#667389" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.766rem;">
+        <div style=""><h2 id="matchingllmstogpus">Matching LLMs to GPUs</h2>
+
+<ol>
+<li>Macs are the best "default" work option.</li>
+<li>Most work PCs lack dedicated VRAM</li>
+<li>Most work PCs can run small models</li>
+<li>Parameter size (B) is roughly the VRAM target</li>
+<li>Estimate LLM capabilities before purchasing</li>
+<li>Nvidia-based computers are the best choice.</li>
+</ol></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark v-split-container responsive present fit-warning has-dark-background fitted" data-background-color="#666d86" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-v-split media-grid" style="width: 100%; font-size: 0.719rem;">
+        <div style=""><h2 id="quantization">Quantization</h2>
+
+<p>Quantization compresses LLMs by storing weights in fewer bits:</p>
+
+<ul>
+<li><strong>Full precision (FP16)</strong>: ~14GB for a 7B model<br>
+ <em>Highest quality, highest memory</em></li>
+<li><strong>8-bit (INT8)</strong>: ~7GB<br>
+ <em>Excellent quality, half the memory</em></li>
+<li><strong>4-bit (INT4)</strong>: ~3.5GB<br>
+ <em>Slight quality tradeoff, significant memory savings</em></li>
+</ul></div>
+        <figure style=""><img src="images/a-photograph-of-a-small-owl-perched-on-a_TOgKKK20TjeUnpjTUvhfPg_JM8GIqLrSLqKWP5vpLpdmA.png" class=" position-center-center"></figure>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings dark default-container responsive present fit-warning has-dark-background fitted" data-background-color="#666782" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.578rem;">
+        <div style=""><h2 id="commonquantizationformats">Common Quantization Formats</h2>
+
+<ul>
+<li><strong>GGUF (GGML Unified Format)</strong><br>
+ <em>Optimized for CPUs and Apple Silicon; portable and widely supported</em></li>
+<li><strong>GPTQ</strong><br>
+ <em>Popular for GPU acceleration; fast inference</em></li>
+<li><strong>AWQ (Activation-aware Quantization)</strong><br>
+ <em>Advanced technique balancing accuracy and speed</em></li>
+<li><strong>MLX</strong> (Metal acceleration)<br>
+ <em>Optimized specifically for Apple hardware; offers ~20-30% performance improvement</em></li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark cover-container responsive present has-dark-background fitted" data-background-color="#66627e" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-cover" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="3.runlocalllmswithragfunctions">3. Run local LLMs with RAG functions</h1></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark default-container responsive present has-dark-background fitted" data-background-color="#665c7a" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.813rem;">
+        <div style=""><h1 id="user-friendlylocalapps">User-Friendly Local Apps</h1>
+
+<ul>
+<li>LM Studio: Closed-source, first-class citizen</li>
+<li>Jan.ai: Open-source, "calmer" user experience</li>
+<li>Ollama: High efficiency but lacks a UI</li>
+<li>AnythingLLM: Multifunctionality, RAG focus</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark default-container responsive present has-dark-background fitted" data-background-color="#665776" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.859rem;">
+        <div style=""><h2 id="lmstudio">LM Studio</h2>
+
+<ul>
+<li>Cross-platform: macOS, Windows, Linux</li>
+<li>Built-in model library with easy downloads</li>
+<li>Completely offline operation after setup</li>
+<li>ChatGPT-like interface running locally</li>
+<li>Basic RAG capabilities included</li>
+<li>Powered by llama.cpp under the hood</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark cover-container responsive present has-dark-background fitted" data-background-color="#665172" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-cover" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="livedemo">Live Demo</h1>
+
+<p>LM Studio (MAC)</p></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark default-container responsive present has-dark-background fitted" data-background-color="#664f70" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.813rem;">
+        <div style=""><h2 id="jan.ai">Jan.ai</h2>
+
+<ul>
+<li>Fully open-source alternative (AGPL licensed)</li>
+<li>Similar experience to LM Studio</li>
+<li>Multiple backends (llama.cpp, TensorRT)</li>
+<li>Evolving rapidly with new features</li>
+<li>Community-driven development</li>
+<li>Local API server capabilities</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark cover-container responsive present has-dark-background fitted" data-background-color="#684f6e" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-cover" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="demo">Demo</h1>
+
+<p>Jan (PC)</p></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark full-image-container responsive present has-dark-background fitted" data-background-color="#6a506c" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-full-image media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><video controls="" class=" size-contain position-center-center" data-paused-by-reveal=""><source src="images/Jan Demo.mp4"></video></div></div>
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings dark default-container responsive present fit-warning has-dark-background fitted" data-background-color="#6c506b" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.625rem;">
+        <div style=""><h2 id="macspecificunlock">Mac Specific "Unlock"</h2>
+
+<p>Apple Silicon Macs have a software limit on GPU memory:</p>
+
+<ul>
+<li>Default: ~75% of physical RAM available for GPU</li>
+<li>Advanced users can modify this limit by:</li>
+<li>Disabling System Integrity Protection (SIP)</li>
+<li>Modifying system graphics driver settings</li>
+<li>Only recommended for dedicated AI machines</li>
+<li><p>Most users with 7B-13B models won't need this</p>
+<code class="hljs routeros">sudo sysctl iogpu.<span class="hljs-attribute">wired_limit_mb</span>=&lt;mb&gt;</code></li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark default-container responsive present has-dark-background fitted" data-background-color="#6e5169" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.953rem;">
+        <div style=""><h3 id="notesonrag">Notes on RAG</h3>
+
+<ul>
+<li>Feed your notes, PDFs, research papers</li>
+<li>Query in natural language</li>
+<li>Get responses based on your personal data</li>
+<li>All while keeping information private</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark default-container responsive present fit-warning has-dark-background fitted" data-background-color="#705168" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.766rem;">
+        <div style=""><h2 id="nvidiachatrtxpc">NVIDIA ChatRTX (PC)</h2>
+
+<ul>
+<li>Specialized for NVIDIA RTX 30/40/50 series GPUs</li>
+<li>Blazingly fast RAG optimized for tensor cores</li>
+<li>Document and image search</li>
+<li>Voice input</li>
+<li>Remarkably smooth performance</li>
+<li>Windows 11 with modern NVIDIA GPU required</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark cover-container responsive present has-dark-background fitted" data-background-color="#725367" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-cover" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="demo">Demo</h1>
+
+<p>ChatRTX (PC)</p></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark full-image-container responsive present has-dark-background fitted" data-background-color="#745667" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-full-image media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><video controls="" class=" size-contain position-center-center" data-paused-by-reveal=""><source src="images/ChatRTX PC Demo.mp4"></video></div></div>
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings dark default-container responsive present has-dark-background fitted" data-background-color="#755967" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.813rem;">
+        <div style=""><h2 id="ragtorichesr2r">RAG to Riches (R2R)</h2>
+
+<ul>
+<li>Production-grade RAG framework</li>
+<li>Knowledge graphs</li>
+<li>Multi-step reasoning</li>
+<li>Hybrid search (keywords + vectors)</li>
+<li>Tool-using agents</li>
+<li>More complex setup but extremely powerful</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark cover-container responsive present has-dark-background fitted" data-background-color="#775c67" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-cover" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="4.transcribeaudioandvideofileslocally">4. Transcribe audio and video files locally</h1></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark default-container responsive present has-dark-background fitted" data-background-color="#796067" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.953rem;">
+        <div style=""><h3 id="localaudiotransformation">Local Audio Transformation</h3>
+
+<ul>
+<li>State-of-the-art speech recognition</li>
+<li>Open-source and runs locally</li>
+<li>Multiple sizes (tiny → large)</li>
+<li>Supports 99 languages</li>
+<li>Transcribe without sharing audio</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark default-container responsive present fit-warning has-dark-background fitted" data-background-color="#7a6367" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.719rem;">
+        <div style=""><h2 id="macwhisper">MacWhisper</h2>
+
+<ul>
+<li>Native macOS app for Whisper</li>
+<li>Metal acceleration for Apple Silicon</li>
+<li>Excellent transcription capabilities</li>
+<li>Speaker diarization (who spoke when)</li>
+<li>Punctuation and formatting</li>
+<li><p>Free and paid Pro versions</p>
+<a href="https://goodsnooze.gumroad.com/l/macwhisper">https://goodsnooze.gumroad.com/l/macwhisper</a></li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark cover-container responsive present has-dark-background fitted" data-background-color="#7b6666" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-cover" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="livedemo">Live Demo</h1>
+
+<p>MacWhisper (MAC)</p></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark cover-container responsive present has-dark-background fitted" data-background-color="#7b6866" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-cover" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="5.securingremoteinference">5. Securing remote inference</h1></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark default-container responsive present fit-warning has-dark-background fitted" data-background-color="#7b6965" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.766rem;">
+        <div style=""><h3 id="remotellmsviaapi">Remote LLMs via API</h3>
+
+<ul>
+<li>Best quality &amp; performance</li>
+<li>Very large context windows (100K+)</li>
+<li>No local device hardware constraints</li>
+<li>Incorporate inference into software</li>
+<li>Economical Pay-for-Usage model</li>
+<li>OpenRouter vs. LLM Companies</li>
+<li>Improved security</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark default-container responsive present fit-warning has-dark-background fitted" data-background-color="#7b6b64" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.766rem;">
+        <div style=""><h3 id="securingremotellms">Securing Remote LLMS</h3>
+
+<ul>
+<li>Strip sensitive information (e.g., names)</li>
+<li>Use providers with strong data guarantees</li>
+<li>Segment your usage between local for sensitive tasks and remote for public-domain questions</li>
+<li>Hugging Face Private Inference
+
+<ul>
+<li>Your own server running open models</li>
+<li>Remote but still under your control</li>
+</ul></li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark default-container responsive present has-dark-background fitted" data-background-color="#7b6d64" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.859rem;">
+        <div style=""><h1 id="conclusion">Conclusion</h1>
+
+<p>By managing your inference at the edge, you:</p>
+
+<ul>
+<li>Reclaim control over privacy and security</li>
+<li>Use cloud services selectively</li>
+<li>Work effectively even when disconnected</li>
+<li>Control your AI experience completely</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings dark v-split-container responsive present fit-warning has-dark-background fitted" data-background-color="#7b6f63" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-v-split media-grid" style="width: 100%; font-size: 0.719rem;">
+        <div style=""><h1 id="bookanaiconsultation">Book an AI Consultation</h1>
+<div class="single-image-wrapper"><figure><img src="images/L2QR.png" class=" size-contain position-center-center"></figure></div></div>
+        <div style=""><h1 id="ksuaicommunity">KSU AI Community</h1>
+<div class="single-image-wrapper"><figure><img src="images/https___teams.microsoft.com_l_te.png" class=" size-contain position-center-center"></figure></div></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings dark default-container responsive present has-dark-background fitted" data-background-color="#7b7163" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="discussion">Discussion</h1>
+
+<p>Thank you for attending the AI Fair!</p>
+<div class="single-image-wrapper"><figure><img src="images/Screenshot%202025-03-31%20at%202.08.44%E2%80%AFPM.png" class=" size-contain position-center-center"></figure></div></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section></div>
+</div>
+<script src="engine/index.js"></script>
+<script src="engine/pptxgen.min.js"></script>
+<script src="engine/pfill.js"></script>
+<script src="engine/published.js"></script>
+<script>
+Reveal.configure({
+progress:true,
+progress:true,
+dependencies: [
+  {
+    src: "engine/highlight.js",
+    sync: true,
+    callback: function () {
+      hljs.initHighlightingOnLoad();
+    },
+  },
+],
+});
+</script>
+</body>
+</html>
